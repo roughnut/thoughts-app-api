@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 const { format } = require("date-fns");
 
@@ -5,7 +6,7 @@ const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
+            default: () => new mongoose.Types.ObjectId()
         },
         reactionBody: {
             type: String,
