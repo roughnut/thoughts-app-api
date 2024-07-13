@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 
-db.once("connection", () => {
+db.once("connected", () => {
     app.listen(PORT, () => {
         console.log(`Connected to server on http://localhost:${PORT} `);
     });
