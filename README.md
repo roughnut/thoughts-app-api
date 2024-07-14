@@ -6,13 +6,13 @@ Challenge is to build an API for a thoughts social media application using Expre
 
 [User Story](#user-story) and [Acceptance Criteria](#acceptance-criteria) are below.
 
-## Screenshot
+## Walkthrough video
 
-![screenshot](path_to_screenshot "link to screenshot")
+[Walkthrough video URL](https://drive.google.com/file/d/1zRV0zKaSlgYUUWoc7dpVDJHgjtk69EJl/view?usp=sharing "link to walkthrough")
 
-## Usage
+## Github Repo
 
-[Github Pages URL](github_pages_url "link to deployed site")
+[Github Repo URL](https://github.com/roughnut/thoughts-app-api "link to Github repo")
 
 ## User Story
 
