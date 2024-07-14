@@ -5,14 +5,13 @@ const {
     deleteReaction
 } = require("../../../../controllers/reactionController");
 
-// /api/thoughts/:thoughtId/reactions
-
-router.route("/")
-    .post(createReaction);
-
-// /api/thoughts/:thoughtId/reactions/:reactionId
-
-router.route("/:reactionId")
+// /api/thoughts/:thoughtId/:reactionId
+router.route("/:thoughtId/:reactionId")
     .delete(deleteReaction);
+
+// /api/thoughts/reactions/:thoughtId
+
+router.route("/:thoughtId")
+    .post(createReaction);
 
 module.exports = router;

@@ -14,7 +14,10 @@ module.exports = {
   // get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId });
+      const user = await User.findById( req.params.userId )
+        .populate("thoughts")
+        .populate("friends");
+
       if (!user) {
         res.status(404).json({message: "User not found."});
         return;
@@ -54,15 +57,22 @@ module.exports = {
       });
     }
   },
-  // delete a user
+  // delete a user (and associated thoughts)
   async deleteUser(req, res) {
     try {
-      const deletedUser = await User.deleteOne({ _id: req.params.userId });
-      if (deletedUser.deletedCount === 0) {
-        res.json({message: "No such user"});
-        return;
+      // first get the user
+      const userToDelete = await User.findById(req.params.userId);
+      if (!userToDelete) {
+        return res.status(404).json({message: "No such user"});
       }
-      res.status(204).json({ message: "User deleted" });
+      // next delete their thoughts
+      await Promise.all(userToDelete.thoughts.map(async (thoughtId) => {
+        await Thought.findByIdAndDelete(thoughtId);
+      }));
+      // now delete the user
+      await User.findByIdAndDelete(req.params.userId);
+
+      res.status(200).json({ message: "User and any user thoughts deleted" });
     } catch (error) {
       console.error("Error deleting user: ", error);
       res.status(500).json({
